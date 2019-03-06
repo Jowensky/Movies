@@ -27,6 +27,6 @@ export default {
     });
   },
   omdb: function(data) {
-    return axios.get("http://www.omdbapi.com/?apikey=a9f6407&t=" + data);
+    return axios.get("https://www.omdbapi.com/?apikey=a9f6407&t=" + data);
   }
 };
