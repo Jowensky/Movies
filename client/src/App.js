@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Home from './pages/Home'
 import style from './style/style.css'
+import { Provider } from "react-redux";
+import store from "./store";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <Provider store={store}>
         <Home style={style} />
-      </div>
+      </Provider>
     );
   }
 }

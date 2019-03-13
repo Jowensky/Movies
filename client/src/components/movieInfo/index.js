@@ -8,7 +8,7 @@ const Movieinfo = props => {
       <iframe id="youtube" width='700' height='450' align='middle' src={props.youtube} frameBorder='0' allow='autoplay' encrypted-media="true" allowFullScreen></iframe>
         <div id="info">
           <div>{props.plot}</div>
-          <div>{props.rated}{props.runtime}{props.genre}</div>
+          <div>{props.genre}{props.rated}{props.runtime}</div>
           <div>{props.director}</div>
         </div>
       </div>

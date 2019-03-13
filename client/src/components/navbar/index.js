@@ -5,8 +5,8 @@ export function Navbar(props) {
     <div className="nav-bar fixed">
       <nav>
         <div className="nav-wrapper black">
-          <form>
-            <div className="input-field">{props.children}</div>
+          <form autoComplete="off" className="input-field" onSubmit={event => props.search(event)}>
+            {props.children}
           </form>
         </div>
       </nav>
@@ -14,15 +14,12 @@ export function Navbar(props) {
   );
 }
 
+
 export function Input(props) {
-  return (
-    <form autoComplete="off" onSubmit={event => props.search(event)}>
-      <input id="artist" type="search" {...props} />
-    </form>
-  );
+  return <input id="artist" type="search" {...props} />
 }
 
-export function Label(props) {
+export function Label() {
   return (
       <i className="material-icons" id="submit">search</i>
   );

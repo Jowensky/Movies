@@ -1,55 +1,35 @@
 import React, { Component } from "react";
-import API from "../utils/api";
 import Movieinfo from "../components/movieInfo"
 import Container from "../components/container";
 import Header from "../components/header";
-import {Label, Input, Navbar} from "../components/navbar";
-require("dotenv").config();
+import { Input, Navbar} from "../components/navbar";
+import { Info, Poster } from '../actions/movie-actions';
+import getVideo from "../actions/youtube-actions";
+import { connect } from "react-redux";
+import axios from "axios";
 
 class Home extends Component {
   state = {
     movie: "",
-    director: "",
-    rated: "",
-    plot: "",
-    runtime: "",
-    genre: "",
-    youtube: ""
+    youtube: null
   };
 
   componentDidMount() {
-    this.background();
+    this.initialBackground();
   }
 
-  background = () => {
-    API.background()
-      .then(res => document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${res.data.results[0].backdrop_path})`)
-      .catch(err => console.log(err));
-  };
-
-  poster = (search) => {
-    this.setState({ movie: ""})
-    const find = {
-      query: search.data.Title,
-      year: search.data.Year,
-    }
-
-    API.poster(find)
+  initialBackground = () => {
+    axios.get("//api.themoviedb.org/3/trending/movie/week?api_key=d3bd842cd067b7bd659924a258f4ce8d")
       .then(res => document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${res.data.results[0].backdrop_path})`)
       .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
 
-    if (event.key === 'Enter') {
-      this.movieInfo();
-    } else {
-
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  }
   };
 
   movieInfo = event => {
@@ -57,65 +37,46 @@ class Home extends Component {
 
     document.getElementById('info').style.display = 'block'
 
-    API.omdb(this.state.movie)
-    .then((res) => {
-      this.setState({
-        director: res.data.Director,
-        rated: res.data.Rated,
-        plot: res.data.Plot,
-        runtime: res.data.Runtime,
-        genre: res.data.Genre
-      })
-      console.log(this.state.runtime)
-      this.getVideo(res)
-     })
-    .catch(err => console.log(err))
-  };
-
-  getVideo = res => {
-    const search = `${this.state.director} ${res.data.Title} movie trailer ${res.data.Year}`
-    this.poster(res)
-    const options = {
-      part: "snippet",
-      maxResults: 1,
-      key: "AIzaSyC7PXhSNVVsm-fxia2x6uiluvBZe0p9Y2M",
-      q: search,
-      order: "viewCount"
-    };
-
-    API.youtube(options)
-    .then(res => this.placeVidInHtml(res.data.items[0].id.videoId))
-    .catch((err) => {
-      this.setState({ youtube: "" })
-      console.log(err)
-    })
+    this.props.Info(this.state.movie);
+    this.setState({
+      movie: ""
+    });
   }
 
-  placeVidInHtml = id => {
-    this.setState({ youtube: `https://www.youtube.com/embed/${id}` })
-  };
+  componentWillReceiveProps(props) {
+    const videoSearch = `${props.info.director} ${props.info.title} movie trailer ${props.info.year}`
+    const posterSearch = {
+      query: props.info.title,
+      year: props.info.year
+    }
+
+    this.props.getVideo(videoSearch);
+    this.props.Poster(posterSearch);
+    document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${props.background})`
+    this.setState({ youtube: `https://www.youtube.com/embed/${props.video}` })
+  }
 
   render() {
     return (
       <div>
-        <Navbar>
+        <Navbar
+          search={this.movieInfo}
+          >
         <Input
           value={this.state.movie}
           onChange={this.handleInputChange}
-          search={this.movieInfo}
           name="movie"
           />
-        <Label />
         </Navbar>
         <Container>
           <Header />
           <Movieinfo 
             youtube={this.state.youtube}
-            rated={this.state.rated === "UNRATED"  || this.state.rated === "N/A" || !this.state.rated ? '' : `${this.state.rated} | `}
-            plot={this.state.plot}
-            runtime={this.state.runtime === "UNRATED"  || this.state.runtime === "N/A" || !this.state.runtime ? '' : `${this.state.runtime} | `}
-            genre={this.state.genre === "UNRATED"  || this.state.genre === "N/A" || !this.state.genre ? '' : this.state.genre}
-            director={this.state.director === "N/A" ? '' : this.state.director}
+            genre={this.props.info.genre === "UNRATED"  || this.props.info.genre === "N/A" || !this.props.info.genre ? '' : `${this.props.info.genre}`}
+            rated={this.props.info.rated === "UNRATED"  || this.props.info.rated === "N/A" || !this.props.info.rated ? '' : ` | ${this.props.info.rated} `}
+            plot={this.props.info.plot}
+            runtime={this.props.info.runtime === "UNRATED"  || this.props.info.runtime=== "N/A" || !this.props.info.runtime ? '' : `| ${this.props.info.runtime}`}
+            director={this.props.info.director === "N/A" ? '' : this.props.info.director}
           />
         </Container>
       </div>
@@ -123,4 +84,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  info: state.movieInfo.imbd,
+  video: state.youtube.item,
+  background: state.background.poster
+});
+
+export default connect(mapStateToProps, { Info, getVideo, Poster } )(Home);
