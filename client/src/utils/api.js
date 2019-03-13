@@ -16,7 +16,7 @@ export default {
     return axios.get("//api.themoviedb.org/3/search/movie?api_key=d3bd842cd067b7bd659924a258f4ce8d");
   },
   youtube: function(options) {
-    return axios.get("//googleapis.com/youtube/v3/search", {
+    return axios.get("https://cors-anywhere.herokuapp.com/https://www.googleapis.com/youtube/v3/search", {
       params: {
         part: options.part,
         key: options.key,
