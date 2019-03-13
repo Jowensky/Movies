@@ -40,13 +40,21 @@ class Home extends Component {
   };
 
   handleInputChange = event => {
+
+    if (event.key === 'Enter') {
+      this.movieInfo();
+    } else {
+
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
+  }
   };
 
-  movieInfo = () => {
+  movieInfo = event => {
+    event.preventDefault();
+
     document.getElementById('info').style.display = 'block'
 
     API.omdb(this.state.movie)
@@ -94,11 +102,10 @@ class Home extends Component {
         <Input
           value={this.state.movie}
           onChange={this.handleInputChange}
+          search={this.movieInfo}
           name="movie"
           />
-        <Label 
-          search={this.movieInfo}
-        />
+        <Label />
         </Navbar>
         <Container>
           <Header />
