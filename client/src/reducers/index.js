@@ -1,9 +1,24 @@
 import { combineReducers } from 'redux';
-import { info, screenBackground}  from './movie-reducers';
-import youtubeReducer  from './youtube-reducers'
+import CastMembersReducer from './Cast-Members';
+import Listings from './Listings';
+import OnDisplay from './On-Display';
+import RelatedReducer from './Related';
+import MovieSearch  from './Search/movie';
+import ShowSearch from './Search/show';
+import TrailerReducer from './Trailer';
+import MoviesPlayingReducer from './Now-Playing/movies';
+import ShowsPlayingReducer from './Now-Playing/shows';
+import FilmsBannerReducer from './Banner';
 
 export default combineReducers({
-    youtube: youtubeReducer,
-    movieInfo: info,
-    background: screenBackground
-})
+    OnDisplay,
+    TrailerReducer,
+    CastMembersReducer,
+    RelatedReducer,
+    Listings,
+    ShowSearch,
+    MovieSearch,
+    MoviesPlayingReducer,
+    ShowsPlayingReducer,
+    FilmsBannerReducer
+});

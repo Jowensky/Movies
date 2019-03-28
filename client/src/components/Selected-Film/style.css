@@ -1,0 +1,50 @@
+#selectedBackDrop {
+    width: 100%;
+    height: 95vh;
+    position: absolute;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+}
+
+#selectedPoster {
+    height: 85vh;
+    margin-bottom: 5vh;
+}
+
+.options {
+    background-color: rgb(28, 27, 27);
+    color: rgb(160, 154, 154);
+    width: 100;
+    height: 5vh;
+    cursor: pointer;
+}
+
+.options ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.options li {
+    display: inline;
+    text-decoration: none;
+}
+
+.options li:hover {
+    cursor: pointer;
+}
+
+#selectedVideo {
+    display: none;
+    width: 100vw;
+    height: 95vh;
+}
+
+#cast {
+    display: none;
+}
+
+.cast img {
+    height: 200px;
+    width: auto;
+}

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto');
+
+.nowPlaying .subject {
+    font-family: Roboto;
+}
+
+.nowPlaying .nowPlayingPoster {
+    margin-bottom: 47px;
+}
+
+.nowPlaying .nowPlayingPoster img {
+    height: 100%;
+    width: 300px;
+    border: 0;
+}
+
+.nowPlaying .nowPlayingPoster h2 {
+    font-size: 30px;
+    font-family: "Open Sans Condensed";
+    color: grey;
+}
+
+.nowPlaying .nowPlayingPoster h1 {
+    font-size: 35px;
+    font-family: Roboto;
+    letter-spacing: 2px;
+} 

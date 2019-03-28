@@ -1,29 +1,35 @@
 import React, { Component } from "react";
-import Movieinfo from "../components/movieInfo"
-import Container from "../components/container";
-import Header from "../components/header";
-import { Input, Navbar} from "../components/navbar";
-import { Info, Poster } from '../actions/movie-actions';
-import getVideo from "../actions/youtube-actions";
 import { connect } from "react-redux";
-import axios from "axios";
+import axios from 'axios'
+import { NavLink, Redirect } from "react-router-dom";
+import { NowPlaying, NowPlayingMedia } from '../components/Now-Playing';
+import { NavBar, Input } from '../components/Nav'
+import { Banner, Movies } from '../components/Sliding-Banner'
+import OnDisplay from '../actions/On-Display';
+import Listings from '../actions/Listings'
+import SearchFilm from '../actions/Search/movie'
+import SearchShow from '../actions/Search/show'
+import MoviesPlaying from '../actions/Now-Playing/movies';
+import ShowsPlaying from '../actions/Now-Playing/shows';
+import FilmsBanner from '../actions/Banner';
 
 class Home extends Component {
   state = {
-    movie: "",
-    youtube: null
+    reviews: -1,
+    search: "",
+    tosearch: false
   };
 
+
+  /* ---------------- Component Life-Cycle -------------*/
   componentDidMount() {
-    this.initialBackground();
+    this.props.FilmsBanner();
+    this.props.MoviesPlaying()
+    this.props.ShowsPlaying();
   }
 
-  initialBackground = () => {
-    axios.get("//api.themoviedb.org/3/trending/movie/week?api_key=d3bd842cd067b7bd659924a258f4ce8d")
-      .then(res => document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${res.data.results[0].backdrop_path})`)
-      .catch(err => console.log(err));
-  };
 
+  /* ------------------ Handle Input Change ------------- */
   handleInputChange = event => {
 
     const { name, value } = event.target;
@@ -32,62 +38,150 @@ class Home extends Component {
     });
   };
 
-  movieInfo = event => {
-    event.preventDefault();
-
-    document.getElementById('info').style.display = 'block'
-
-    this.props.Info(this.state.movie);
-    this.setState({
-      movie: ""
-    });
-  }
-
   componentWillReceiveProps(props) {
-    const videoSearch = `${props.info.director} ${props.info.title} movie trailer ${props.info.year}`
-    const posterSearch = {
-      query: props.info.title,
-      year: props.info.year
-    }
-
-    this.props.getVideo(videoSearch);
-    this.props.Poster(posterSearch);
-    document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${props.background})`
-    this.setState({ youtube: `https://www.youtube.com/embed/${props.video}` })
+    props.movies.forEach(film => console.log(film.id))
   }
+
+
+  /* --------------- Film Reviews ----------------*/
+  filmReviews = (id) => {
+    axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1`)
+    .then(res => console.log(res))
+    .catch((err) => console.log(err))
+  }
+
+  
+  /* ------------ Top Rated & Most Popular ------------ */
+  list = data => {
+    let obj = -1
+    switch(data) {
+      case 'popShows':
+        obj = {
+          title: 'Popular Shows',
+          url: '//api.themoviedb.org/3/tv/popular?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
+          stream: 'show'
+        }
+      break;
+      case 'popFilm':
+        obj = {
+          title: 'Popular Film',
+          url: '//api.themoviedb.org/3/movie/popular?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=2',
+          stream: 'movie'
+        }
+      break;
+      case 'topRatedShows': 
+        obj = {
+          title: 'Top Rated Shows',
+          url: '//api.themoviedb.org/3/tv/top_rated?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
+          stream: 'show'
+        }
+      break;
+      case 'topRatedFilms':
+        obj = {
+          title: 'Top Rated Films',
+          url: '//api.themoviedb.org/3/movie/top_rated?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
+          stream: 'movie'
+        }
+      break;
+      default:
+      break;
+    }
+    this.props.Listings(obj)
+  }
+
+
+  /* ----------------- Search -------------------*/
+  search = event => {
+    event.preventDefault();
+    this.props.SearchFilm(this.state.search)
+    this.props.SearchShow(this.state.search)
+    this.setState({tosearch: true})
+  }
+
+ 
+  /* --------------- Chossen Film --------------------*/
+  movieChosen = event => {
+    const choosenFilm = this.props.movies.find(({ title }) => title === event);
+    this.props.OnDisplay(choosenFilm)
+  }
+
+  showChosen = event => {
+    const choosenShow = this.props.shows.find(({ title }) => title === event);
+
+    this.props.OnDisplay(choosenShow)
+  }
+ 
 
   render() {
+    if (this.state.tosearch === true) {
+      return <Redirect to='/search' />
+    }
     return (
       <div>
-        <Navbar
-          search={this.movieInfo}
-          >
-        <Input
-          value={this.state.movie}
-          onChange={this.handleInputChange}
-          name="movie"
+        <NavBar
+        list={this.list}
+        search={this.search}
+        >
+        <Input 
+        value={this.state.search}
+        onChange={this.handleInputChange}
+        name="search"
+        />
+        </NavBar>
+        {this.props.moviesBanner.length ? (
+        <Banner>
+        {this.props.moviesBanner.map((movie, index) => (
+          <Movies 
+            poster={movie.poster}
+            title={movie.title}
           />
-        </Navbar>
-        <Container>
-          <Header />
-          <Movieinfo 
-            youtube={this.state.youtube}
-            genre={this.props.info.genre === "UNRATED"  || this.props.info.genre === "N/A" || !this.props.info.genre ? '' : `${this.props.info.genre}`}
-            rated={this.props.info.rated === "UNRATED"  || this.props.info.rated === "N/A" || !this.props.info.rated ? '' : ` | ${this.props.info.rated} `}
-            plot={this.props.info.plot}
-            runtime={this.props.info.runtime === "UNRATED"  || this.props.info.runtime=== "N/A" || !this.props.info.runtime ? '' : `| ${this.props.info.runtime}`}
-            director={this.props.info.director === "N/A" ? '' : this.props.info.director}
+        ))}
+        <div>
+          <img src={`https://image.tmdb.org/t/p/original${this.props.moviesBanner[0].poster}`} alt="movie poster"/>
+          <h1>{this.props.moviesBanner[0].title}</h1>
+        </div> 
+        </Banner>
+        ) : (<h1></h1>)} 
+        {this.props.movies.length ? (
+        <NowPlaying>
+        {this.props.movies.map((film, index) => (
+          <NavLink  to="/display"> 
+            <NowPlayingMedia 
+              poster={film.backdrop}
+              title={film.title}
+              subject={"Movie"}
+              index={index}
+              chosen={this.movieChosen}
+            />
+          </NavLink>
+          ))}    
+        </NowPlaying>
+        ) : (<div/>)}
+        <img className="tvShowBanner" src={"https://image.tmdb.org/t/p/original/sAzw6I1G9JUxm86KokIDdQeWtaq.jpg"} alt="T.V." />
+        {this.props.shows.length ? (
+        <NowPlaying>
+        {this.props.shows.map((show, index) => (
+        <NavLink  to="/display"> 
+          <NowPlayingMedia 
+            poster={show.backdrop}
+            title={show.title}
+            subject={"Tv Show"}
+            index={index}
+            chosen={this.showChosen}
           />
-        </Container>
+        </NavLink>
+        ))}    
+        </NowPlaying>
+        ) : (<div/>)}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  info: state.movieInfo.imbd,
-  video: state.youtube.item,
-  background: state.background.poster
+  shows: state.ShowsPlayingReducer.shows,
+  movies: state.MoviesPlayingReducer.movies,
+  moviesBanner: state.FilmsBannerReducer.films
 });
 
-export default connect(mapStateToProps, { Info, getVideo, Poster } )(Home);
+export default connect(mapStateToProps, { OnDisplay, Listings, SearchFilm, SearchShow, MoviesPlaying, ShowsPlaying, FilmsBanner } )(Home);

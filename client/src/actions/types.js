@@ -1,3 +1,10 @@
-export const video = 'video';
-export const movieInfo = 'movieInfo';
-export const background = 'background';
+export const selected = 'selected';
+export const trailer = 'trailer';
+export const related = 'related';
+export const cast = "cast";
+export const listing = "listings";
+export const movieSearch = "movieSearch";
+export const showSearch = "showSearch";
+export const showsNowPlaying = "showsNowPlaying";
+export const moviesNowPlaying = "moviesNowPlaying"
+export const bannerFilms = "bannerFilms"

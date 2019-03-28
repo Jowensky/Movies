@@ -1,0 +1,13 @@
+#movieDisplay {
+    width: 145px;
+    height: 180px;
+    border: 0;
+}
+
+img #movieDisplay {
+    margin: 0;
+}
+
+.contain {
+    border: 0;
+}
