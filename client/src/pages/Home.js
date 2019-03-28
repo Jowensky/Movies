@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from 'axios'
 import { NavLink, Redirect } from "react-router-dom";
 import { NowPlaying, NowPlayingMedia } from '../components/Now-Playing';
 import { NavBar, Input } from '../components/Nav'
@@ -37,18 +36,6 @@ class Home extends Component {
       [name]: value
     });
   };
-
-  componentWillReceiveProps(props) {
-    props.movies.forEach(film => console.log(film.id))
-  }
-
-
-  /* --------------- Film Reviews ----------------*/
-  filmReviews = (id) => {
-    axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1`)
-    .then(res => console.log(res))
-    .catch((err) => console.log(err))
-  }
 
   
   /* ------------ Top Rated & Most Popular ------------ */
