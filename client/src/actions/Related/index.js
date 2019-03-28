@@ -2,7 +2,6 @@ import { related } from "../types";
 import axios from "axios";
 
 const RelatedAction = data => {
-    console.log(data)
     const url = data.stream === "show" ? 
     `//api.themoviedb.org/3/tv/${data.id}/similar?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1` :
     `//api.themoviedb.org/3/movie/${data.id}/similar?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1`

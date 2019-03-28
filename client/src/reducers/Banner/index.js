@@ -7,7 +7,6 @@ const initialState = {
 const FilmsBannerReducer = (state = initialState, action) => {
     switch (action.type) {
         case bannerFilms:
-        console.log(action.payload)
         return {
             ...state,
             films: action.payload

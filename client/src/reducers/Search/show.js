@@ -6,8 +6,7 @@ const initialState = {
 
 const ShowSearch = (state = initialState, action) => {
     switch (action.type) {
-        case showSearch:
-        console.log(action.payload)
+        case showSearch: 
         return {
             ...state,
             shows: action.payload
