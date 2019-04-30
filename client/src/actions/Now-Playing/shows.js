@@ -5,7 +5,7 @@ const ShowsPlaying = () => {
     return function(dispatch) {
         axios.get('//api.themoviedb.org/3/tv/on_the_air?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1')
         .then(res => {
-            let shows = (res.data.results.slice(3, 6))
+            let shows = (res.data.results.slice(3, 5))
             let ShowsOnAir = []
             shows.forEach((show) => {
             let obj = {

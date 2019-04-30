@@ -8,7 +8,6 @@ import ShowSearch from './Search/show';
 import TrailerReducer from './Trailer';
 import MoviesPlayingReducer from './Now-Playing/movies';
 import ShowsPlayingReducer from './Now-Playing/shows';
-import FilmsBannerReducer from './Banner';
 
 export default combineReducers({
     OnDisplay,
@@ -19,6 +18,5 @@ export default combineReducers({
     ShowSearch,
     MovieSearch,
     MoviesPlayingReducer,
-    ShowsPlayingReducer,
-    FilmsBannerReducer
+    ShowsPlayingReducer
 });

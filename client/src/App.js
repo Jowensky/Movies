@@ -6,7 +6,7 @@ import Search from './pages/Search';
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import store from "./store";
-import './style/couch.css';
+import './styles/style.css'
 
 class App extends Component {
 
@@ -19,7 +19,7 @@ class App extends Component {
             <Route path="/display" component={Display} />
             <Route path="/favorites" component={Favorites} />
             <Route path="/search" component={Search} />
-            {/* <Route default component={Lost} /> */}
+            <Route default component={Home} />
           </Switch>
         </Router>
       </Provider>

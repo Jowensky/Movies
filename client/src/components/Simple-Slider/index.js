@@ -4,13 +4,13 @@ import './style.css'
 
 class FilmSlider extends React.Component {
   render() {
-    var settings = {
+    const settings = {
       arrows: true,
       infinite: true,
       speed: 500,
       slidesToShow: 5,
       slidesToScroll: 5,
-      className: "slider"
+      className: "slider row"
     };
     return (
       <Slider {...settings}>

@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Related from '../components/Display';
+import { Redirect } from "react-router-dom";
+import {RelatedFilms, RelatedContainer} from '../components/Display';
 import FilmSlider from '../components/Simple-Slider';
-import { Selected, Options, Trailer, Casts} from '../components/Selected-Film'
+import { NavBar, Input } from '../components/Nav'
+import { Selected, MovieTrailer, Casts} from '../components/Selected-Film'
 import CastMembersAction from '../actions/Cast-Members';
 import RelatedAction from '../actions/Related';
 import TrailerAction from '../actions/Trailer';
 import OnDisplay from '../actions/On-Display';
+import SearchFilm from '../actions/Search/movie'
+import SearchShow from '../actions/Search/show'
+import Listing from '../actions/Listings'
 
 class Movie extends Component {
   state = {
     youtube: -1,
-    id: ''
+    search: "",
+    id: '',
+    tosearch: false,
+    director: ""
   };
+  
 
   /* ---------------- Component Life-Cycle -------------*/
   componentDidMount() {
@@ -28,12 +37,13 @@ class Movie extends Component {
       this.props.TrailerAction({id: props.selected.id, stream: props.selected.type})
       this.props.RelatedAction({id: props.selected.id, stream: props.selected.type})
       this.props.CastMembersAction({id: props.selected.id, stream: props.selected.type})
+      this.setState({id: props.selected.id})
     }
 
-    this.setState({id: props.selected.id})
-
+    if (props.trailer) {
     const video = "https://www.youtube.com/embed/" + props.trailer
     this.setState({ youtube: video})
+    }
   }
 
 
@@ -46,79 +56,122 @@ class Movie extends Component {
     });
   };
 
-
-  /* --------------- Toggle --------------------*/
-  mediaInfo = event => {
-    switch(event) {
-      case 'cast':
-      this.toggle('cast')
+  /* ------------ Top Rated & Most Popular ------------ */
+  list = data => {
+    let obj = -1
+    switch(data) {
+      case 'popShows':
+        obj = {
+          title: 'Popular Shows',
+          url: '//api.themoviedb.org/3/tv/popular?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
+          stream: 'show'
+        }
       break;
-      case 'trailer':
-      this.toggle('selectedVideo')
+      case 'popFilm':
+        obj = {
+          title: 'Popular Film',
+          url: '//api.themoviedb.org/3/movie/popular?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=2',
+          stream: 'movie'
+        }
       break;
-      case 'related':
-      this.toggle('related')
+      case 'topRatedShows': 
+        obj = {
+          title: 'Top Rated Shows',
+          url: '//api.themoviedb.org/3/tv/top_rated?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
+          stream: 'show'
+        }
       break;
-      default: 
+      case 'topRatedFilms':
+        obj = {
+          title: 'Top Rated Films',
+          url: '//api.themoviedb.org/3/movie/top_rated?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
+          stream: 'movie'
+        }
+      break;
+      default:
       break;
     }
+    this.props.Listing(obj)
   }
 
-  toggle = id => {
-    const element = document.getElementById(id)
-    if (element.style.display === "block") {
-      element.style.display = 'none';
-    } else {
-      element.style.display = 'block';
-    }
-  };
+  /* ----------------- Search -------------------*/
+  search = event => {
+    event.preventDefault();
+    this.props.SearchFilm(this.state.search)
+    this.props.SearchShow(this.state.search)
+    this.setState({tosearch: true})
+  }
 
   display = event => {
-    const chosen = this.props.related.find(({ title }) => title === event)
-
+    const chosen = this.props.related.find(({ title }) => title === event); 
+    
     this.props.OnDisplay(chosen)
   }
- 
+
+  inputToggle = () => {
+    console.log("this")
+    // document.getElementById("input").style.display = "show"
+    // document.getElementById("searchIcon").style.display = "none"
+  }
+
 
   render() {
+    if (this.state.tosearch === true) {
+      return <Redirect to='/search' />
+    }
     return (
       <div>
-         <Options 
-         info = {this.mediaInfo}
-         />
+        <NavBar
+          list={this.list}
+          search={this.search}
+          toggleInput={this.inputToggle}
+        >
+        <Input 
+          value={this.state.search}
+          onChange={this.handleInputChange}
+          name="search"
+        />
+        </NavBar>
          {this.props.selected.title ? (
         <Selected 
-         backdrop = {this.props.selected.backdrop}
-         poster = {this.props.selected.poster}
-         title = {this.props.selected.title}
-         overview = {this.props.selected.overview}
-         rating = {this.props.selected.vote}
+          backdrop = {this.props.selected.backdrop}
+          poster = {this.props.selected.poster}
+          title = {this.props.selected.title}
+          overview = {this.props.selected.overview}
+          rating = {this.props.selected.vote}
+          // director = {this.props.casts[0]}
          >
-         {this.props.casts.map(castMember => (
-         <Casts 
-          photo = {castMember.photo}
-          character = {castMember.character}
-          name = {castMember.name}
-         />
-         ))}
-         </Selected>
-         ) : (<div/>)}
-         <Trailer 
-         video = {this.state.youtube}
-         />
-         <div id="related">
-          <FilmSlider>
-          <NavLink  to="/display"> 
-            {this.props.related.map(relative => (
-            <Related 
-              poster = {relative.poster}
-              title = {relative.title}
-              display = {this.display}
-              />
-              ))}
+        <FilmSlider>
+          {this.props.casts.map(castMember => (
+          <Casts 
+            photo = {castMember.photo}
+            character = {castMember.character}
+            name = {castMember.name}
+          />
+          ))}
+        </FilmSlider>
+        </Selected>
+        ) : (<div/>)}
+        {this.state.youtube === -1 ? false :
+          <MovieTrailer 
+            video = {this.state.youtube}
+          />
+        }
+        {this.props.related.length ? (
+        <RelatedContainer>
+          {this.props.related.map(relative => (
+            <div>
+              <NavLink  to="/display"> 
+                <RelatedFilms 
+                  poster = {relative.poster}
+                  title = {relative.title}
+                  display = {this.display}
+                />
               </NavLink>
-            </FilmSlider>
-          </div>
+            </div>
+          ))}
+        </RelatedContainer>
+         ) : (<div/>) }
       </div>
     );
   }
@@ -131,4 +184,4 @@ const mapStateToProps = state => ({
   casts: state.CastMembersReducer.casts,
 });
 
-export default connect(mapStateToProps, {CastMembersAction, RelatedAction, TrailerAction, OnDisplay} )(Movie);
+export default connect(mapStateToProps, {CastMembersAction, RelatedAction, TrailerAction, OnDisplay, Listing, SearchFilm, SearchShow } )(Movie);

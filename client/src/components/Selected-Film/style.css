@@ -1,16 +1,3 @@
-#selectedBackDrop {
-    width: 100%;
-    height: 95vh;
-    position: absolute;
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
-}
-
-#selectedPoster {
-    height: 85vh;
-    margin-bottom: 5vh;
-}
-
 .options {
     background-color: rgb(28, 27, 27);
     color: rgb(160, 154, 154);
@@ -34,17 +21,98 @@
     cursor: pointer;
 }
 
-#selectedVideo {
-    display: none;
-    width: 100vw;
-    height: 95vh;
+#selectedBackDrop {
+    width: 100%;
+    height: 98vh;
+    position: fixed;
+    top: 3vh;
+    z-index: -1;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
 }
 
-#cast {
-    display: none;
+#selectedPoster {
+    height: auto;
+    width: 55vh;
+    margin-top: 10vh;
 }
 
-.cast img {
-    height: 200px;
-    width: auto;
+#selectedBackDrop {
+    filter: brightness(50%);
+}
+
+.selectedDesciption h1 {
+    text-align: center;
+    margin-bottom: 5vh;
+    margin-top: 15vh;
+}
+
+#overview {
+    height: 170px;
+    overflow: scroll;
+}
+
+.starRating {
+    color: rgb(239, 239, 50);
+    font-size: 23px;
+}
+
+#director {
+    font-size: 20px;
+}
+
+.rating {
+    color: white;
+}
+
+#trailer {
+    margin-top: 50px;
+    width: 800px;
+    height: 420px;
+}
+
+#details {
+    color: white;
+}
+
+.castMember {
+    position: relative; 
+    display: inline-block;
+}
+
+.castMember img {
+    display: block;
+    width: 100px !important;
+    height: 150px !important;
+}
+
+.castMember .name {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+
+.castMember:hover img  {
+    opacity: .3;
+}
+
+.castMember:hover .name  {
+    opacity: 1;
+}
+
+.character .performer {
+    color: white;
+    font-size: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
 }

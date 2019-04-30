@@ -1,34 +1,21 @@
-.slick-slider {
-      margin-left: 21px;
-      /* margin-right: 20px; */
-}
-
 .slick-slide {
-      width: 145px !important;
-}
-
-.slides {
-position: relative;
+      width: auto !important;
+      margin: 0;
+      padding: 0;
 }
 
 .slick-prev, .slick-next {
-      position: absolute;
       top: 50%;
-      color: black;
-      background-color: black;
       height: 40px;
       width: 40px;
+      font-size: 40px;
       z-index: 30;
 }
 
 .slick-prev {
-      left: 5%;
+      left: -10%;
 }
 
 .slick-next {
-      right: 5%;
-}
-
-#related {
- display: none;
+      right: -10%;
 }

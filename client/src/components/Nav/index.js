@@ -5,29 +5,38 @@ import { NavLink } from "react-router-dom";
 export function NavBar(props) {
   return (
     <div id="navbar">
-      <a className="link" href="/home">Home</a>
-      <a className="link" href="/hot">Hot</a>
-      <NavLink  to="/favorites/popular-shows"> 
-        <li onClick={() => props.list('popShows')}>Shows</li>
-      </NavLink>
-      <NavLink  to="/favorites/popular-film"> 
-        <li onClick={() => props.list('popFilm')}>Film</li>
-      </NavLink>
-        <a className="link" href="/top20">Top 20</a>
-      <NavLink  to="/favorites/top-rated-films-20"> 
-        <li onClick={() => props.list('topRatedShows')}>Shows</li>
-      </NavLink>
-      <NavLink  to="/favorites/top-rated-shows-20"> 
-        <li onClick={() => props.list('topRatedFilms')}>Film</li>
-      </NavLink>
-       <i className="fas fa-search"></i>
-       <form onSubmit={(event) => props.search(event)}>
+      <ul>
+        <li><NavLink to="/"><span id="home">Home</span></NavLink></li>
+        <li>Hot
+          <ul>
+            <li onClick={() => props.list('popShows')}> 
+              <NavLink  to="/favorites/popular-shows">Shows</NavLink>
+            </li>
+            <li onClick={() => props.list('popFilm')}>
+              <NavLink  to="/favorites/popular-film">Film</NavLink>
+            </li>
+          </ul>
+        </li>
+        <li>Top 20
+          <ul>
+            <li onClick={() => props.list('topRatedShows')}>
+              <NavLink  to="/favorites/top-rated-films-20">Shows</NavLink>
+            </li>
+            <li onClick={() => props.list('topRatedFilms')}>      
+              <NavLink  to="/favorites/top-rated-shows-20">Film</NavLink>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div className="searchInput">
+        <form autocomplete="off" onSubmit={(event) => props.search(event)}>
         {props.children}
         </form>
+      </div>
     </div>
   )
 }
 
 export function Input(props) {
-  return <input type="text" {...props}/>
+  return <input id="input" type="text" placeHolder="Search" {...props}/>
 }

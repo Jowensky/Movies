@@ -1,24 +1,52 @@
-#logo {
-    float: left;
-    padding: 0;
-    margin: 0;
-    width: 100px;
-}
-
 #navbar {
-position:  fixed;
-top: 0;
-background-color: rgba(40, 31, 31, .7);
-width: 100%;
-z-index: 4;
+    position:  fixed;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+    background-color: rgb(28, 27, 27);
+    color: rgb(160, 154, 154);
 }
 
-#navbar .link {
-float: left;
-color: #f2f2f2;
-padding: 14px 16px;
-text-decoration: none;
-font-size: 17px;
+#home {
+    color: rgb(160, 154, 154);
+}
+
+#navbar ul {
+    margin:0;
+    padding: 0;
+    list-style: none;
+}
+
+#navbar ul li {
+    float: left;
+    width: 100px; /*padding maybe */
+    line-height: 40px;
+    text-align: center;
+    height: 38px;
+}
+
+#navbar ul li a {
+    text-decoration: none;
+    color: black; 
+    display: block;
+}
+
+#navbar ul li a:hover {
+    font-size: larger;
+}
+
+#navbar ul li ul li {
+    display: none;
+}
+
+#navbar ul li ul li a {
+    width: 100px;
+    /* background-color: rgb(230, 230, 230); */
+    /* margin-bottom: 6px; */
+}
+
+#navbar ul li:hover ul li {
+    display: block;
 }
 
 #navbar i {
@@ -32,11 +60,16 @@ font-size: 17px;
     cursor: pointer;
 }
 
-#navbar a:hover {
-background-color: #ddd;
-color: black;
+.searchInput form {
+    float: right;
+    margin-top: 1vh;
+    margin-right: 3vw;
 }
 
-#navbar a:nth-child(0):hover {
-    background-color: none !important;
+input#input:focus {
+   width: 400px;
+}
+
+input#input::placeholder {
+    padding: 2px;
 }

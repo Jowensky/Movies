@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
-import { NowPlaying, NowPlayingMedia } from '../components/Now-Playing';
+import { Redirect } from "react-router-dom";
+import { NowPlayingParallax, NowPlaying } from '../components/Now-Playing';
 import { NavBar, Input } from '../components/Nav'
-import { Banner, Movies } from '../components/Sliding-Banner'
 import OnDisplay from '../actions/On-Display';
 import Listings from '../actions/Listings'
 import SearchFilm from '../actions/Search/movie'
 import SearchShow from '../actions/Search/show'
 import MoviesPlaying from '../actions/Now-Playing/movies';
 import ShowsPlaying from '../actions/Now-Playing/shows';
-import FilmsBanner from '../actions/Banner';
 
 class Home extends Component {
   state = {
@@ -22,9 +20,23 @@ class Home extends Component {
 
   /* ---------------- Component Life-Cycle -------------*/
   componentDidMount() {
-    this.props.FilmsBanner();
+    // window.addEventListener("scroll", this.scrollEffect)
     this.props.MoviesPlaying()
     this.props.ShowsPlaying();
+  }
+
+
+  /* ------------------- Scroll Effect ------------------*/
+  scrollEffect = () => {
+    const target = document.querySelectorAll("#description")
+
+    let index = 0, length = target.length;
+    for (index; index < length; index++) {
+       let pos = window.pageYOffset * -.2 /*target[index].dataset.rate */
+
+
+       target[index].style.transform = `translate3d(0px, ${pos}px, 0px)`;
+    }
   }
 
 
@@ -97,6 +109,14 @@ class Home extends Component {
 
     this.props.OnDisplay(choosenShow)
   }
+
+  shorten = overview => {
+    if (overview) {
+      return `${overview.substr(0, 150)}..`;
+    } else {
+      return ``;
+    }
+  };
  
 
   render() {
@@ -115,48 +135,29 @@ class Home extends Component {
         name="search"
         />
         </NavBar>
-        {this.props.moviesBanner.length ? (
-        <Banner>
-        {this.props.moviesBanner.map((movie, index) => (
-          <Movies 
-            poster={movie.poster}
-            title={movie.title}
-          />
-        ))}
-        <div>
-          <img src={`https://image.tmdb.org/t/p/original${this.props.moviesBanner[0].poster}`} alt="movie poster"/>
-          <h1>{this.props.moviesBanner[0].title}</h1>
-        </div> 
-        </Banner>
-        ) : (<h1></h1>)} 
         {this.props.movies.length ? (
         <NowPlaying>
-        {this.props.movies.map((film, index) => (
-          <NavLink  to="/display"> 
-            <NowPlayingMedia 
-              poster={film.backdrop}
-              title={film.title}
-              subject={"Movie"}
-              index={index}
-              chosen={this.movieChosen}
-            />
-          </NavLink>
-          ))}    
+        {this.props.movies.map((film) => (
+          <NowPlayingParallax 
+            poster={film.backdrop}
+            title={film.title}
+            chosen={this.movieChosen}
+            overview={this.shorten(film.overview)}
+            vote={film.vote}
+          />
+        ))}    
         </NowPlaying>
         ) : (<div/>)}
-        <img className="tvShowBanner" src={"https://image.tmdb.org/t/p/original/sAzw6I1G9JUxm86KokIDdQeWtaq.jpg"} alt="T.V." />
         {this.props.shows.length ? (
         <NowPlaying>
-        {this.props.shows.map((show, index) => (
-        <NavLink  to="/display"> 
-          <NowPlayingMedia 
+        {this.props.shows.map((show) => (
+          <NowPlayingParallax 
             poster={show.backdrop}
             title={show.title}
-            subject={"Tv Show"}
-            index={index}
             chosen={this.showChosen}
+            overview={this.shorten(show.overview)}
+            vote={show.vote}
           />
-        </NavLink>
         ))}    
         </NowPlaying>
         ) : (<div/>)}
@@ -168,7 +169,6 @@ class Home extends Component {
 const mapStateToProps = state => ({
   shows: state.ShowsPlayingReducer.shows,
   movies: state.MoviesPlayingReducer.movies,
-  moviesBanner: state.FilmsBannerReducer.films
 });
 
-export default connect(mapStateToProps, { OnDisplay, Listings, SearchFilm, SearchShow, MoviesPlaying, ShowsPlaying, FilmsBanner } )(Home);
+export default connect(mapStateToProps, { OnDisplay, Listings, SearchFilm, SearchShow, MoviesPlaying, ShowsPlaying } )(Home);

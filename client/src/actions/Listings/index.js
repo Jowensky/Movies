@@ -5,7 +5,7 @@ const Listings = data => {
     return function(dispatch) {
       axios.get(data.url)
       .then(res => {
-        let lists = (res.data.results.slice(0, 21))
+        let lists = (res.data.results.slice(0, 12))
         let media = [{PageTitle: data.title}]
         lists.forEach(list => {
           let obj = {

@@ -1,7 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .mediaPoster {
     width: 230px;
+    height: 338px;
+    margin-right: 20px;
 }
 
 .mediaTitle {
     font-size: 15px;
+}
+
+.mediaTitle {
+    text-align: center;
+}
+
+#group {
+    text-align: center;
+    color: black;
+    font-family: Roboto;
+    margin-top: 10vh;
+    margin-bottom: 22px;
+}
+
+.favs h2 {
+    text-decoration: none;
+    color: black;
+    width: 230px;
+    margin-bottom: 14px;
+    font-size: 20px;
+    font-family: Roboto;
 }

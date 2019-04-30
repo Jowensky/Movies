@@ -8,16 +8,21 @@ export function Selected(props) {
             <div className="container">
                 <div className="row" id="film">
                     <div className="selectedPosterDiv col-md-6 order 5">
-                        <img id="selectedPoster" src={`https://image.tmdb.org/t/p/original${props.poster}`}/>
+                        <img id="selectedPoster" src={`https://image.tmdb.org/t/p/original${props.poster}`} alt={props.title}/>
                     </div>
-                    <div className="selectedDesciption col-md-6 order3">
-                        <h1>{props.title}</h1>
-                        <p>{props.overview}</p>
-                        <p>{props.genre}</p>
-                        <p>{props.rating}</p>
-                    </div>
-                    <div id="cast" className="col-md-6 order3 cast">
-                    {props.children}
+                    <div className="col-md-6 order3" id="details">
+                        <div className="selectedDesciption displayGroup">
+                            <h1>{props.title}</h1>
+                        <div className="row justify-content-around">
+                            <p><i class="fas fa-star starRating"></i><span className="rating">{props.rating}</span></p>
+                            <p>{props.genre}</p>
+                            <p id="director">{props.director}</p>
+                        </div>
+                            <p id="overview">{props.overview}</p>
+                        </div>
+                        <div id="cast">
+                            {props.children}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -27,11 +32,13 @@ export function Selected(props) {
 
 export function Casts(props) {
     return (
-      <div>
-        <img src={`https://image.tmdb.org/t/p/original${props.photo}`} alt={props.name} />
-        <p className="character">{props.character}</p>
-        <p className="name">{props.name}</p>
-      </div>
+        <div className="castMember">
+            <img src={`https://image.tmdb.org/t/p/original${props.photo}`} alt={props.name} />
+            <div className="name">
+                <p className="character">{props.character}</p>
+                <p className="performer">{props.name}</p>
+            </div>
+        </div>
     );
 }
 
@@ -47,11 +54,15 @@ export function Options(props) {
     )
 }
 
-export function Trailer(props) {
+export function MovieTrailer(props) {
     return (
-        <iframe id="selectedVideo"  
-            src={props.video} title="video" frameBorder="0" 
-            allow="autoplay; encrypted-media" allowFullScreen>
-        </iframe>
+        <div className="row justify-content-center">
+            <div>
+                <iframe id="trailer" 
+                    src={props.video} title="video" frameBorder="0" 
+                    allow="autoplay; encrypted-media" allowFullScreen>
+                </iframe>
+            </div>
+        </div>
     )
 }
