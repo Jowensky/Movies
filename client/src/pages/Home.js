@@ -143,7 +143,6 @@ class Home extends Component {
             title={film.title}
             chosen={this.movieChosen}
             overview={this.shorten(film.overview)}
-            vote={film.vote}
           />
         ))}    
         </NowPlaying>
@@ -156,7 +155,6 @@ class Home extends Component {
             title={show.title}
             chosen={this.showChosen}
             overview={this.shorten(show.overview)}
-            vote={show.vote}
           />
         ))}    
         </NowPlaying>

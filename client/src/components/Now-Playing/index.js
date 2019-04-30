@@ -15,10 +15,6 @@ export function NowPlayingParallax(props) {
         <p className="trailer" onClick={() => props.chosen(props.title)}>
           <NavLink  to="/display"><i className="fab fa-youtube"></i></NavLink>
         </p>
-        <div className="rating">
-          <i className="fas fa-star"></i>
-          <p className="vote">{props.vote}</p>
-        </div>
       </div>
     </section>
   )

@@ -1,5 +1,6 @@
 import React from "react";
 import './style.css'
+import blankHead from './images/blankhead.png';
 
 export function Selected(props) {
     return (
@@ -33,7 +34,7 @@ export function Selected(props) {
 export function Casts(props) {
     return (
         <div className="castMember">
-            <img src={`https://image.tmdb.org/t/p/original${props.photo}`} alt={props.name} />
+            <img src={props.photo === null ? blankHead : `https://image.tmdb.org/t/p/original${props.photo}`} alt={props.name} />
             <div className="name">
                 <p className="character">{props.character}</p>
                 <p className="performer">{props.name}</p>
