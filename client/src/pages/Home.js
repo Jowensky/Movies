@@ -20,23 +20,8 @@ class Home extends Component {
 
   /* ---------------- Component Life-Cycle -------------*/
   componentDidMount() {
-    // window.addEventListener("scroll", this.scrollEffect)
     this.props.MoviesPlaying()
     this.props.ShowsPlaying();
-  }
-
-
-  /* ------------------- Scroll Effect ------------------*/
-  scrollEffect = () => {
-    const target = document.querySelectorAll("#description")
-
-    let index = 0, length = target.length;
-    for (index; index < length; index++) {
-       let pos = window.pageYOffset * -.2 /*target[index].dataset.rate */
-
-
-       target[index].style.transform = `translate3d(0px, ${pos}px, 0px)`;
-    }
   }
 
 

@@ -29,7 +29,7 @@ export function NavBar(props) {
         </li>
       </ul>
       <div className="searchInput">
-        <form autocomplete="off" onSubmit={(event) => props.search(event)}>
+        <form autoComplete="off" onSubmit={(event) => props.search(event)}>
         {props.children}
         </form>
       </div>
@@ -38,5 +38,5 @@ export function NavBar(props) {
 }
 
 export function Input(props) {
-  return <input id="input" type="text" placeHolder="Search" {...props}/>
+  return <input id="input" type="text" placeholder="Search" {...props}/>
 }

@@ -21,7 +21,6 @@ class Favorites extends Component {
     if (props.medium.length) {
       this.setState({title: Object.values(page).toString()})
     }
-    console.log(Object.values(page).toString())
   }
 
 

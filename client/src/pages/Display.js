@@ -108,12 +108,6 @@ class Movie extends Component {
     this.props.OnDisplay(chosen)
   }
 
-  inputToggle = () => {
-    console.log("this")
-    // document.getElementById("input").style.display = "show"
-    // document.getElementById("searchIcon").style.display = "none"
-  }
-
 
   render() {
     if (this.state.tosearch === true) {
@@ -124,7 +118,6 @@ class Movie extends Component {
         <NavBar
           list={this.list}
           search={this.search}
-          toggleInput={this.inputToggle}
         >
         <Input 
           value={this.state.search}
@@ -139,7 +132,6 @@ class Movie extends Component {
           title = {this.props.selected.title}
           overview = {this.props.selected.overview}
           rating = {this.props.selected.vote}
-          // director = {this.props.casts[0]}
          >
         <FilmSlider>
           {this.props.casts.map(castMember => (

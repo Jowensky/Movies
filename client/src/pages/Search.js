@@ -24,10 +24,6 @@ class Favorites extends Component {
     });
   };
 
-  componentWillReceiveProps(props) {
-    console.log(props)
-  }
-
   
   /* ---------------------- Display -----------------------*/
   displayMovie = event => {
@@ -41,6 +37,7 @@ class Favorites extends Component {
     
     this.props.OnDisplay(chosen)
   }
+
 
   /* ------------ Top Rated & Most Popular ------------ */
   list = data => {
@@ -86,7 +83,6 @@ class Favorites extends Component {
     event.preventDefault();
     this.props.SearchFilm(this.state.search)
     this.props.SearchShow(this.state.search)
-    // window.location.reload();
   }
   
  

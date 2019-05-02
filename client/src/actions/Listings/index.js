@@ -24,7 +24,6 @@ const Listings = data => {
           payload: media
         })
       })
-      .catch(err => console.log(err))
     }
 }
 

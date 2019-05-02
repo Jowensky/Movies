@@ -23,7 +23,6 @@ const SearchFilm = data => {
           payload: search
         })
       })
-      .catch(err => console.log(err))
     }
 }
 

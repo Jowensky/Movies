@@ -23,7 +23,6 @@ const SearchShow = data => {
           payload: search
         })
       })
-      .catch(err => console.log(err))
     }
 }
 

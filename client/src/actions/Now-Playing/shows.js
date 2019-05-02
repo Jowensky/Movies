@@ -24,7 +24,6 @@ const ShowsPlaying = () => {
                 payload: ShowsOnAir
             })
         })
-        .catch((err) => console.log(err))
     }
 } 
 

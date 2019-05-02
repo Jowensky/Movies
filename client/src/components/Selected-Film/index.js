@@ -15,7 +15,7 @@ export function Selected(props) {
                         <div className="selectedDesciption displayGroup">
                             <h1>{props.title}</h1>
                         <div className="row justify-content-around">
-                            <p><i class="fas fa-star starRating"></i><span className="rating">{props.rating}</span></p>
+                            <p><i className="fas fa-star starRating"></i><span className="rating">{props.rating}</span></p>
                             <p>{props.genre}</p>
                             <p id="director">{props.director}</p>
                         </div>

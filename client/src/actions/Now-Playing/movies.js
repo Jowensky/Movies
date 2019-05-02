@@ -25,7 +25,6 @@ const MoviesPlaying = () => {
                 payload: FilmsNowPlaying
             })
         })
-        .catch((err) => console.log(err))
     }
 }
 

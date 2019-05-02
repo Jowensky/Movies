@@ -26,7 +26,6 @@ const CastMembersAction = data => {
           payload: castMembers
         })
       })
-      .catch(err => console.log(err))
     }
 }
 

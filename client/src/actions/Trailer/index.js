@@ -14,7 +14,6 @@ const TrailerAction = data => {
           payload: uTubeTrailer
         })
       })
-      .catch(err => console.log(err))
     }
 }
 

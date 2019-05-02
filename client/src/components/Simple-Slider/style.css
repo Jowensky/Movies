@@ -19,3 +19,7 @@
 .slick-next {
       right: -10%;
 }
+
+.slick-cloned {
+      /* display: none !important; */
+}

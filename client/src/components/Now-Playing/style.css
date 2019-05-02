@@ -45,3 +45,7 @@ section h2 {
     text-decoration: none;
     font-size: 45px;
 }
+
+.tooLarge {
+    font-size: 60px !important;
+}

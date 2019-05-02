@@ -28,7 +28,6 @@ const RelatedAction = data => {
           payload: similar
         })
       })
-      .catch(err => console.log(err))
     }
 }
 
