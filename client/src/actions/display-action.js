@@ -21,7 +21,6 @@ export function TrailerAction(data) {
         payload: uTubeTrailer
       })
     })
-    .catch(err => console.log(err))
   }
 }
 
@@ -51,7 +50,6 @@ export function RelatedAction(data) {
         payload: similar
       })
     })
-    .catch(err => console.log(err))
   }
 }
 
@@ -78,6 +76,5 @@ export function CastMembersAction(data) {
         payload: castMembers
       })
     })
-    .catch(err => console.log(err))
   }
 }

@@ -5,8 +5,7 @@ const MoviesPlaying = () => {
     return function(dispatch) {
         axios.get('//api.themoviedb.org/3/movie/now_playing?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1&genre_ids=28')
         .then((res) => {
-            let films = (res.data.results.slice(3, 6))
-            console.log(films)
+            let films = (res.data.results.slice(0, 3))
             let FilmsNowPlaying = []
             films.forEach((film) => {
             let obj = {

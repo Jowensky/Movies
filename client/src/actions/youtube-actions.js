@@ -18,7 +18,6 @@ export const getVideo = search => dispatch => {
         payload: res.data.items[0].id.videoId
       })
     })
-    .catch(err => console.log(err))
 };
 
 export default getVideo;
