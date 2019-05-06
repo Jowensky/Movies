@@ -41,8 +41,9 @@
 
 #navbar ul li ul li a {
     width: 100px;
-    /* background-color: rgb(230, 230, 230); */
-    /* margin-bottom: 6px; */
+    color: rgb(160, 154, 154);
+    background-color: rgb(28, 27, 27);
+    border-bottom: 6px solid black;
 }
 
 #navbar ul li:hover ul li {
