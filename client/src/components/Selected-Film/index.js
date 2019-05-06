@@ -36,8 +36,8 @@ export function Casts(props) {
         <div className="castMember">
             <img src={props.photo === null ? blankHead : `https://image.tmdb.org/t/p/original${props.photo}`} alt={props.name} />
             <div className="name">
-                <p className="character">{props.character}</p>
                 <p className="performer">{props.name}</p>
+                <p className="character">Character: {props.character}</p>
             </div>
         </div>
     );

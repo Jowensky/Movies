@@ -4,7 +4,12 @@
       padding: 0;
 }
 
+.slider {
+      position: relative;
+}
+
 .slick-prev, .slick-next {
+      position: absolute;
       top: 50%;
       height: 40px;
       width: 40px;

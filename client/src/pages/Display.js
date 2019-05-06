@@ -56,6 +56,7 @@ class Movie extends Component {
     });
   };
 
+
   /* ------------ Top Rated & Most Popular ------------ */
   list = data => {
     let obj = -1
