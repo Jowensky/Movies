@@ -6,12 +6,12 @@ export function Selected(props) {
     return (
         <div>
             <img id="selectedBackDrop" src={`https://image.tmdb.org/t/p/original${props.backdrop}`} alt="Poster" />
-            <div className="container">
-                <div className="row" id="film">
-                    <div className="selectedPosterDiv col-md-6 order 5">
+            <div className="container-fluid">
+                <div className="row text-center" id="film">
+                    <div className="selectedPosterDiv col-lg-6 col-md-12 order2">
                         <img id="selectedPoster" src={`https://image.tmdb.org/t/p/original${props.poster}`} alt={props.title}/>
                     </div>
-                    <div className="col-md-6 order3" id="details">
+                    <div className="col-lg-6 col-md-12 order1" id="details">
                         <div className="selectedDesciption displayGroup">
                             <h1>{props.title}</h1>
                         <div className="row justify-content-around">
