@@ -9,7 +9,7 @@ const RelatedAction = data => {
     axios
       .get(url)
       .then((res) => {
-        let group = res.data.results.slice(0,5)
+        let group = res.data.results.slice(0,4)
         let similar = []
         group.forEach(media => {
           let obj = {

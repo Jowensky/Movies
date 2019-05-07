@@ -8,7 +8,7 @@ class FilmSlider extends React.Component {
       arrows: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 5,
+      slidesToShow: 4,
       slidesToScroll: 1,
       className: "slider row"
     };

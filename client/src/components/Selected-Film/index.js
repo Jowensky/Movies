@@ -6,7 +6,7 @@ export function Selected(props) {
     return (
         <div>
             <img id="selectedBackDrop" src={`https://image.tmdb.org/t/p/original${props.backdrop}`} alt="Poster" />
-            <div className="container-fluid">
+            <div className="container">
                 <div className="row text-center" id="film">
                     <div className="selectedPosterDiv col-lg-6 col-md-12 order2">
                         <img id="selectedPoster" src={`https://image.tmdb.org/t/p/original${props.poster}`} alt={props.title}/>
@@ -36,8 +36,8 @@ export function Casts(props) {
         <div className="castMember">
             <img src={props.photo === null ? blankHead : `https://image.tmdb.org/t/p/original${props.photo}`} alt={props.name} />
             <div className="name">
-                <p className="performer">{props.name}</p>
-                <p className="character">Character: {props.character}</p>
+                <p id="performer">{props.name}</p>
+                <p id="character">Character: {props.character}</p>
             </div>
         </div>
     );
@@ -57,12 +57,14 @@ export function Options(props) {
 
 export function MovieTrailer(props) {
     return (
-        <div className="row justify-content-center">
-            <div>
-                <iframe id="trailer" 
-                    src={props.video} title="video" frameBorder="0" 
-                    allow="autoplay; encrypted-media" allowFullScreen>
-                </iframe>
+        <div className="container-fluid">
+            <div className="row justify-content-center">
+                <div className="col-sm-12 text-center center">
+                    <iframe id="trailer" 
+                        src={props.video} title="video" frameBorder="0" 
+                        allow="autoplay; encrypted-media" allowFullScreen>
+                    </iframe>
+                </div>
             </div>
         </div>
     )
