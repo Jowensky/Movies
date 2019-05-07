@@ -14,6 +14,7 @@
 }
 
 .relatedFilm img {
-    height: 35vh;
+    height: 38vh;
     width: 25vh;
+    /* padding: 20px; */
 }
