@@ -12,7 +12,10 @@ import TrailerAction from '../actions/Trailer';
 import OnDisplay from '../actions/On-Display';
 import SearchFilm from '../actions/Search/movie'
 import SearchShow from '../actions/Search/show'
-import Listing from '../actions/Listings'
+import TopRatedShowListings from '../actions/Listings/Shows/ratedShows';
+import PopShowListings from '../actions/Listings/Shows/popShows';
+import TopRatedFilmListings from '../actions/Listings/Movies/ratedMovies';
+import PopMovieListings from '../actions/Listings/Movies/popMovies';
 
 class Movie extends Component {
   state = {
@@ -59,41 +62,24 @@ class Movie extends Component {
 
   /* ------------ Top Rated & Most Popular ------------ */
   list = data => {
-    let obj = -1
     switch(data) {
       case 'popShows':
-        obj = {
-          title: 'Popular Shows',
-          url: '//api.themoviedb.org/3/tv/popular?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
-          stream: 'show'
-        }
+        this.props.PopShowListings()
       break;
       case 'popFilm':
-        obj = {
-          title: 'Popular Film',
-          url: '//api.themoviedb.org/3/movie/popular?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=2',
-          stream: 'movie'
-        }
+        this.props.PopMovieListings()
       break;
       case 'topRatedShows': 
-        obj = {
-          title: 'Top Rated Shows',
-          url: '//api.themoviedb.org/3/tv/top_rated?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
-          stream: 'show'
-        }
+        this.props.TopRatedShowListings()
       break;
       case 'topRatedFilms':
-        obj = {
-          title: 'Top Rated Films',
-          url: '//api.themoviedb.org/3/movie/top_rated?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1',
-          stream: 'movie'
-        }
+        this.props.TopRatedFilmListings()
       break;
       default:
       break;
     }
-    this.props.Listing(obj)
   }
+
 
   /* ----------------- Search -------------------*/
   search = event => {
@@ -177,4 +163,8 @@ const mapStateToProps = state => ({
   casts: state.CastMembersReducer.casts,
 });
 
-export default connect(mapStateToProps, {CastMembersAction, RelatedAction, TrailerAction, OnDisplay, Listing, SearchFilm, SearchShow } )(Movie);
+export default connect(mapStateToProps, {CastMembersAction, RelatedAction, 
+  TrailerAction, OnDisplay, 
+  SearchFilm, SearchShow, 
+  TopRatedShowListings, PopShowListings,
+  TopRatedFilmListings, PopMovieListings } )(Movie);

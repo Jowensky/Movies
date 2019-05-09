@@ -20,10 +20,10 @@ export function NavBar(props) {
         <li>Top 20
           <ul>
             <li onClick={() => props.list('topRatedShows')}>
-              <NavLink  to="/favorites/top-rated-films-20">Shows</NavLink>
+              <NavLink  to="/favorites/top-rated-shows-20">Shows</NavLink>
             </li>
             <li onClick={() => props.list('topRatedFilms')}>      
-              <NavLink  to="/favorites/top-rated-shows-20">Film</NavLink>
+              <NavLink  to="/favorites/top-rated-films-20">Film</NavLink>
             </li>
           </ul>
         </li>

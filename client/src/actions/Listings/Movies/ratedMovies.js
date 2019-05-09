@@ -1,16 +1,16 @@
-import { listing } from "../types";
+import { listing } from "../../types";
 import axios from "axios";
 
-const Listings = data => {
+const TopRatedFilmListings = () => {
     return function(dispatch) {
-      axios.get(data.url)
+      axios.get("//api.themoviedb.org/3/movie/top_rated?api_key=d3bd842cd067b7bd659924a258f4ce8d&language=en-US&page=1")
       .then(res => {
         let lists = (res.data.results.slice(0, 12))
-        let media = [{PageTitle: data.title}]
+        let media = [{PageTitle: "Top Rated Film"}]
         lists.forEach(list => {
           let obj = {
-            type: data.stream,
-            title: data.stream === "show" ? list.original_name : list.original_title,
+            type: "movie",
+            title: list.original_title,
             poster: list.poster_path,
             backdrop: list.backdrop_path,
             overview: list.overview,
@@ -27,4 +27,4 @@ const Listings = data => {
     }
 }
 
-export default Listings;
+export default TopRatedFilmListings;
