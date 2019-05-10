@@ -10,9 +10,8 @@ const CastMembersAction = data => {
       .get(url)
       .then((res) => {
         let data = (res.data.cast.slice(0, 6))
-        // const director = res.data.crew.find( director => director.job === "Director" );
+        // const director = res.data.crew.find( director => director.job === "Director" );ß
         let castMembers = []
-        // castMembers.push({director: director.name})
         data.forEach(castMember => {
           let obj = {
             character: castMember.character,

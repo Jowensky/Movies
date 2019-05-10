@@ -36,6 +36,14 @@ class Movie extends Component {
   }
 
   componentWillReceiveProps(props) {
+    // if (props.casts.length) {
+    //   let keys = Object.keys(props.casts);
+    //   console.log(keys)
+    //   // const director = props.casts.filter(word => Object.keys(word) = 0);
+    //   // console.log(director)
+    //   // this.setState({title: Object.values(page).toString()})
+    // }
+    
     if (this.state.id !== props.selected.id) {
       this.props.TrailerAction({id: props.selected.id, stream: props.selected.type})
       this.props.RelatedAction({id: props.selected.id, stream: props.selected.type})
@@ -118,7 +126,8 @@ class Movie extends Component {
           poster = {this.props.selected.poster}
           title = {this.props.selected.title}
           overview = {this.props.selected.overview}
-          rating = {this.props.selected.vote}
+          // rating = {this.props.selected.vote}
+          director = {this.state.director}
          >
         <FilmSlider>
           {this.props.casts.map(castMember => (
