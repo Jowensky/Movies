@@ -32,6 +32,7 @@ export function NavBar(props) {
         <form autoComplete="off" onSubmit={(event) => props.search(event)}>
         {props.children}
         </form>
+        <i onClick={() => props.searchIcon()} className={`fas ${props.icon}`}></i>
       </div>
     </div>
   )
