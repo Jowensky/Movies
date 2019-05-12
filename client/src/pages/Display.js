@@ -23,7 +23,8 @@ class Movie extends Component {
     search: "",
     id: '',
     tosearch: false,
-    director: ""
+    director: "",
+    icon: "fa-search"
   };
   
 
@@ -36,14 +37,6 @@ class Movie extends Component {
   }
 
   componentWillReceiveProps(props) {
-    // if (props.casts.length) {
-    //   let keys = Object.keys(props.casts);
-    //   console.log(keys)
-    //   // const director = props.casts.filter(word => Object.keys(word) = 0);
-    //   // console.log(director)
-    //   // this.setState({title: Object.values(page).toString()})
-    // }
-    
     if (this.state.id !== props.selected.id) {
       this.props.TrailerAction({id: props.selected.id, stream: props.selected.type})
       this.props.RelatedAction({id: props.selected.id, stream: props.selected.type})
@@ -103,6 +96,18 @@ class Movie extends Component {
     this.props.OnDisplay(chosen)
   }
 
+  searchIcon = () => {
+    const input = document.getElementById("input").style
+
+    if (input.display === "none") {
+    input.display = "block"
+    this.setState({icon: "fa-times"})
+    } else {
+      input.display = "none"
+      this.setState({icon: "fa-search"})
+    }
+  }
+
 
   render() {
     if (this.state.tosearch === true) {
@@ -113,6 +118,8 @@ class Movie extends Component {
         <NavBar
           list={this.list}
           search={this.search}
+          searchIcon={this.searchIcon}
+          icon={this.state.icon}
         >
         <Input 
           value={this.state.search}

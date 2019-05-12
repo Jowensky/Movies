@@ -15,7 +15,8 @@ class Favorites extends Component {
   state = {
     films: 'Films',
     shows: 'Shows',
-    search: ""
+    search: "",
+    icon: "fa-search"
   };
 
   /* ------------------ Handle Input Change ------------- */
@@ -69,6 +70,18 @@ class Favorites extends Component {
     this.props.SearchFilm(this.state.search)
     this.props.SearchShow(this.state.search)
   }
+
+  searchIcon = () => {
+    const input = document.getElementById("input").style
+
+    if (input.display === "none") {
+    input.display = "block"
+    this.setState({icon: "fa-times"})
+    } else {
+      input.display = "none"
+      this.setState({icon: "fa-search"})
+    }
+  }
   
  
   render() {
@@ -77,6 +90,8 @@ class Favorites extends Component {
         <NavBar
           list={this.list}
           search={this.search}
+          searchIcon={this.searchIcon}
+          icon={this.state.icon}
         >
         <Input 
           value={this.state.search}

@@ -16,7 +16,8 @@ class Favorites extends Component {
   state = {
     title: '',
     search: "",
-    tosearch: false
+    tosearch: false,
+    icon: "fa-search"
   };
 
   componentWillReceiveProps(props) {
@@ -72,6 +73,18 @@ class Favorites extends Component {
     this.setState({tosearch: true})
   }
 
+  searchIcon = () => {
+    const input = document.getElementById("input").style
+
+    if (input.display === "none") {
+    input.display = "block"
+    this.setState({icon: "fa-times"})
+    } else {
+      input.display = "none"
+      this.setState({icon: "fa-search"})
+    }
+  }
+
   
   render() {
     if (this.state.tosearch === true) {
@@ -82,6 +95,8 @@ class Favorites extends Component {
         <NavBar
           list={this.list}
           search={this.search}
+          searchIcon={this.searchIcon}
+          icon={this.state.icon}
         >
           <Input 
             value={this.state.search}

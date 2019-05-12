@@ -69,6 +69,18 @@ class Home extends Component {
     this.setState({tosearch: true})
   }
 
+  searchIcon = () => {
+    const input = document.getElementById("input").style
+
+    if (input.display === "none") {
+    input.display = "block"
+    this.setState({icon: "fa-times"})
+    } else {
+      input.display = "none"
+      this.setState({icon: "fa-search"})
+    }
+  }
+
  
   /* --------------- Chossen Film --------------------*/
   movieChosen = event => {
@@ -89,18 +101,6 @@ class Home extends Component {
       return ``;
     }
   };
-
-  searchIcon = () => {
-    const input = document.getElementById("input").style
-
-    if (input.display === "none") {
-    input.display = "block"
-    this.setState({icon: "fa-times"})
-    } else {
-      input.display = "none"
-      this.setState({icon: "fa-search"})
-    }
-  }
  
 
   render() {
