@@ -24,7 +24,8 @@ class Movie extends Component {
     id: '',
     tosearch: false,
     director: "",
-    icon: "fa-search"
+    icon: "fa-search",
+    casts: -1
   };
   
 
@@ -37,6 +38,13 @@ class Movie extends Component {
   }
 
   componentWillReceiveProps(props) {
+    if (props.casts.length) {
+      const direc = props.casts.filter(director => director.job === "Director")
+      const notdirec = props.casts.filter(director => director.job !== "Director")
+      this.setState({director: direc[0].persons})
+      this.setState({casts: notdirec})
+    }
+
     if (this.state.id !== props.selected.id) {
       this.props.TrailerAction({id: props.selected.id, stream: props.selected.type})
       this.props.RelatedAction({id: props.selected.id, stream: props.selected.type})
@@ -133,18 +141,20 @@ class Movie extends Component {
           poster = {this.props.selected.poster}
           title = {this.props.selected.title}
           overview = {this.props.selected.overview}
-          // rating = {this.props.selected.vote}
+          rating = {this.props.selected.vote}
           director = {this.state.director}
          >
+        {this.state.casts.length ? (
         <FilmSlider>
-          {this.props.casts.map(castMember => (
-          <Casts 
-            photo = {castMember.photo}
-            character = {castMember.character}
-            name = {castMember.name}
-          />
+          {this.state.casts.map(castMember => (
+            <Casts 
+              photo = {castMember.photo}
+              character = {castMember.character}
+              name = {castMember.name}
+            />
           ))}
         </FilmSlider>
+        ) : (<div/>)}
         </Selected>
         ) : (<div/>)}
         {this.state.youtube === -1 ? false :
