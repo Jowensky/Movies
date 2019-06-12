@@ -19,7 +19,8 @@ const RelatedAction = data => {
             title: data.stream === "show" ? media.original_name : media.original_title,
             overview: media.overview,
             vote: media.vote_average,
-            id: media.id
+            id: media.id,
+            genre: media.genre_ids
           }
           similar.push(obj)
       })

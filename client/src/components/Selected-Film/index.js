@@ -14,11 +14,11 @@ export function Selected(props) {
                     <div className="col-lg-6 col-md-12 order1" id="details">
                         <div className="selectedDesciption displayGroup">
                             <h1>{props.title}</h1>
-                        <div className="row justify-content-around">
-                            <p><i className="fas fa-star starRating"></i><span className="rating">{props.rating}</span></p>
-                            <p>{props.genre}</p>
-                            <p id="director">{props.director}</p>
-                        </div>
+                            <div className="row justify-content-around">
+                                <p><i className="fas fa-star starRating"></i><span className="rating">{props.rating}</span></p>
+                                <p>{props.genre}</p>
+                                <p id="director">{props.director}</p>
+                            </div>
                             <p id="overview">{props.overview}</p>
                         </div>
                         <div id="cast">

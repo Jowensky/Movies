@@ -15,7 +15,8 @@ const ShowsPlaying = () => {
                 title: show.original_name,
                 overview: show.overview,
                 vote: show.vote_average,
-                id: show.id
+                id: show.id,
+                genre: show.genre_ids
             }
             ShowsOnAir.push(obj)
             })

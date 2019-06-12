@@ -16,6 +16,7 @@ import TopRatedShowListings from '../actions/Listings/Shows/ratedShows';
 import PopShowListings from '../actions/Listings/Shows/popShows';
 import TopRatedFilmListings from '../actions/Listings/Movies/ratedMovies';
 import PopMovieListings from '../actions/Listings/Movies/popMovies';
+import GenreAction from '../actions/Genre';
 
 class Movie extends Component {
   state = {
@@ -25,7 +26,8 @@ class Movie extends Component {
     tosearch: false,
     director: "",
     icon: "fa-search",
-    casts: -1
+    casts: -1,
+    genre: false
   };
   
 
@@ -38,6 +40,15 @@ class Movie extends Component {
   }
 
   componentWillReceiveProps(props) {
+
+    // if (props.selected.genre.length) {
+    //   if (!this.state.genre) {
+    //     this.setState({genre:  props.selected.genre})
+
+    //     this.props.GenreAction(this.state.genre)
+    //   } 
+    // }
+
     if (props.casts.length) {
       const direc = props.casts.filter(director => director.job === "Director")
       const notdirec = props.casts.filter(director => director.job !== "Director")
@@ -143,6 +154,7 @@ class Movie extends Component {
           overview = {this.props.selected.overview}
           rating = {this.props.selected.vote}
           director = {this.state.director}
+          // genre = {this.props.selected.genre}
          >
         {this.state.casts.length ? (
         <FilmSlider>
@@ -187,10 +199,11 @@ const mapStateToProps = state => ({
   trailer: state.TrailerReducer.trailer,
   related: state.RelatedReducer.related,
   casts: state.CastMembersReducer.casts,
+  genres: state.GenreReducer.genres
 });
 
 export default connect(mapStateToProps, {CastMembersAction, RelatedAction, 
   TrailerAction, OnDisplay, 
-  SearchFilm, SearchShow, 
+  SearchFilm, SearchShow, GenreAction,
   TopRatedShowListings, PopShowListings,
   TopRatedFilmListings, PopMovieListings } )(Movie);

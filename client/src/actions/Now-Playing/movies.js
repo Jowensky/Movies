@@ -15,10 +15,12 @@ const MoviesPlaying = () => {
                 title: film.title,
                 overview: film.overview,
                 vote: film.vote_average,
-                id: film.id
+                id: film.id,
+                genre: film.genre_ids
             }
                 FilmsNowPlaying.push(obj)
             })
+            console.log(FilmsNowPlaying)
             dispatch({
                 type: moviesNowPlaying,
                 payload: FilmsNowPlaying

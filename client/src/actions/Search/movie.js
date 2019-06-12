@@ -14,7 +14,8 @@ const SearchFilm = data => {
             title: film.title,
             overview: film.overview,
             vote: film.vote_average,
-            id: film.id
+            id: film.id,
+            genre: film.genre_ids
           }
           search.push(obj)
         })

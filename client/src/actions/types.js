@@ -8,3 +8,4 @@ export const showSearch = "showSearch";
 export const showsNowPlaying = "showsNowPlaying";
 export const moviesNowPlaying = "moviesNowPlaying"
 export const bannerFilms = "bannerFilms"
+export const genre = "genre"

@@ -15,7 +15,8 @@ const TopRatedShowListings = () => {
             backdrop: list.backdrop_path,
             overview: list.overview,
             vote: list.vote_average,
-            id: list.id
+            id: list.id,
+            genre: list.genre_ids
           }
           media.push(obj)
         })
