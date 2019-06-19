@@ -8,10 +8,10 @@ export function Selected(props) {
             <img id="selectedBackDrop" src={`https://image.tmdb.org/t/p/original${props.backdrop}`} alt="Poster" />
             <div className="container">
                 <div className="row text-center" id="film">
-                    <div className="selectedPosterDiv col-lg-6 col-md-12 order2">
+                    <div className="selectedPosterDiv col-lg-4 col-md-12 order2">
                         <img id="selectedPoster" src={`https://image.tmdb.org/t/p/original${props.poster}`} alt={props.title}/>
                     </div>
-                    <div className="col-lg-6 col-md-12 order1" id="details">
+                    <div className="col-lg-6 col-md-8 order1" id="details">
                         <div className="selectedDesciption displayGroup">
                             <h1>{props.title}</h1>
                             <div className="row justify-content-around">
