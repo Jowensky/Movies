@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import './style.css'
+import './style.css';
 
 class FilmSlider extends React.Component {
   render() {

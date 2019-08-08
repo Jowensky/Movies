@@ -20,6 +20,7 @@ const ShowsPlaying = () => {
             }
             ShowsOnAir.push(obj)
             })
+            console.log(ShowsOnAir)
             dispatch({
                 type: showsNowPlaying,
                 payload: ShowsOnAir
