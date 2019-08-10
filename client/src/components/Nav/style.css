@@ -22,12 +22,13 @@
     width: 100px; /*padding maybe */
     line-height: 40px;
     text-align: center;
-    height: 38px;
+    height: 40px;
 }
 
 #navbar ul li a {
     text-decoration: none;
     color: black; 
+    position: relative;
     display: block;
 }
 
