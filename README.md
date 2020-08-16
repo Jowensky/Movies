@@ -10,3 +10,6 @@ Succeeding cloning this repo, run yarn or npm install in your selected IDE then 
 - Express - Node
 - React
 - Redux
+
+# Deployment 
+https://arcane-chamber-74484.herokuapp.com/
