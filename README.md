@@ -5,6 +5,6 @@
 Succeeding cloneing this repo, run yarn or npm install in your selected IDE then yarn start
 
 # Built With
-- Express - Node.js
+- Express - Node
 - React
 - Redux
