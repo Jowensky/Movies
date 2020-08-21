@@ -10,6 +10,7 @@ Succeeding cloning this repo, run yarn or npm install in your selected IDE then 
 - Express - Node
 - React
 - Redux
+- OMDb API
 
 # Deployment 
 https://arcane-chamber-74484.herokuapp.com/
